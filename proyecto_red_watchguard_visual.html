@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto de Red Empresarial</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    background: linear-gradient(135deg, #0f1720 0%, #1f3a5f 50%, #0f1720 100%);
+    color: #e6edf3;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header {
+    background: linear-gradient(120deg, #0f1720, #1f3a5f);
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 3px solid #00d4ff;
+}
+.card {
+    background: rgba(23, 34, 48, 0.95);
+    border: 1px solid #233244;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #ffffff;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+.device img {
+    border-radius: 10px;
+    background: white;
+    padding: 5px;
+}
+.table {
+    background: rgba(31, 58, 95, 0.8);
+    color: #e6edf3;
+}
+.table th {
+    background: #1f3a5f;
+}
+footer {
+    background: #0f1720;
+    border-top: 1px solid #233244;
+    padding: 20px 0;
+}
+.badge {
+    font-size: 0.8em;
+}
+</style>
+</head>
+
+<body>
+
+<header class="bg-dark text-white py-5 text-center">
+<h1 class="display-4 fw-light">Infraestructura de Red Empresarial</h1>
+<p class="lead">Diseño Avanzado con Seguridad WatchGuard</p>
+</header>
+
+<div class="container my-5">
+
+<div class="card mb-4 shadow-lg">
+<div class="card-body text-white">
+<h2 class="card-title text-primary">Introducción</h2>
+<p class="card-text">Este proyecto presenta el diseño integral y la planificación estratégica de una red empresarial robusta para un campus universitario con múltiples edificios. Implementamos una solución avanzada que combina firewalls WatchGuard de última generación, switches administrables de alto rendimiento y una segmentación VLAN inteligente. Nuestro enfoque garantiza no solo la seguridad óptima contra amenazas cibernéticas, sino también un rendimiento excepcional, escalabilidad y facilidad de gestión. La red está diseñada para soportar el crecimiento futuro, integrando tecnologías inalámbricas seguras y una infraestructura de fibra óptica de alta velocidad.</p>
+</div>
+</div>
+
+<div class="card mb-4 shadow-lg">
+<div class="card-body text-white">
+<h2 class="card-title text-primary">Mapa del Campus</h2>
+<img src="images/edificios.png" alt="Vista aérea tipo satélite del campus universitario con cinco edificios principales: Administración (A), Laboratorios (B), Biblioteca (C), Aulas (D) y Centro de Datos (E), conectados por enlaces de fibra óptica" class="img-fluid rounded mx-auto d-block mb-3" style="max-width:800px;">
+<p class="card-text">La imagen muestra una vista aérea del campus universitario ubicado en una gran ciudad, con cinco edificios principales interconectados mediante enlaces de fibra óptica (líneas punteadas amarillas y blancas). Los edificios representan: <span class="badge bg-info">Administración (A)</span>, <span class="badge bg-success">Laboratorios (B)</span>, <span class="badge bg-warning">Biblioteca (C)</span>, <span class="badge bg-danger">Aulas (D)</span> y <span class="badge bg-secondary">Centro de Datos (E)</span>. Este mapa conceptual sirve como base para planificar la topología física de la red, visualizando la distribución espacial y las conexiones de alta velocidad que unen los diferentes departamentos.</p>
+</div>
+</div>
+
+<div class="row g-4 mb-4">
+<div class="col-md-4">
+<div class="card h-100 shadow-lg">
+<div class="card-body d-flex align-items-center text-white">
+<img src="images/device_firewall.png" alt="Imagen de Firewall WatchGuard" class="me-3 rounded" style="width:120px; height:auto;">
+<div>
+<h5 class="card-title text-danger">Firewall WatchGuard</h5>
+<p class="card-text">Nuestro firewall central protege la red contra ataques externos avanzados, incluyendo DDoS, malware y amenazas de día cero. Controla el tráfico de red con políticas granulares, soporta VPN seguras para acceso remoto y ofrece monitoreo en tiempo real con alertas inteligentes. Compatible con estándares de seguridad empresarial como PCI DSS y HIPAA.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card h-100 shadow-lg">
+<div class="card-body d-flex align-items-center text-white">
+<img src="images/device_switch.png" alt="Imagen de Switch Administrable" class="me-3 rounded" style="width:120px; height:auto;">
+<div>
+<h5 class="card-title text-warning">Switch Administrable</h5>
+<p class="card-text">Switches de capa 3 distribuyen eficientemente el tráfico dentro de cada edificio, soportando velocidades Gigabit y 10 Gigabit. Permiten la creación de VLAN para segmentación lógica, QoS para priorización de tráfico crítico y protocolos de redundancia como STP para alta disponibilidad. Gestionables vía web y SNMP para monitoreo centralizado.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card h-100 shadow-lg">
+<div class="card-body d-flex align-items-center text-white">
+<img src="images/device_ap.png" alt="Imagen de Access Point" class="me-3 rounded" style="width:120px; height:auto;">
+<div>
+<h5 class="card-title text-info">Access Point</h5>
+<p class="card-text">Puntos de acceso Wi-Fi 6 proporcionan conectividad inalámbrica de alta velocidad y baja latencia. Implementan seguridad WPA3, roaming seamless entre APs y gestión centralizada. Soporte para múltiples SSID para segmentar redes de invitados, estudiantes y personal administrativo, con capacidades de análisis de tráfico y control de ancho de banda.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card mb-4 shadow-lg">
+<div class="card-body text-white">
+<h2 class="card-title text-primary">Diagrama de Red</h2>
+<img src="images/network_diagram.png" alt="Diagrama de la topología de red" class="img-fluid rounded mx-auto d-block mb-3" style="max-width:800px;">
+<p class="card-text">Este diagrama ilustra la topología lógica de la red, mostrando la interconexión de dispositivos y el flujo de datos. El firewall actúa como gateway central, los switches manejan la distribución local, y los access points extienden la cobertura inalámbrica. Las VLAN aseguran la separación de tráfico, mientras que los enlaces de fibra óptica garantizan alta velocidad y redundancia.</p>
+</div>
+</div>
+
+<div class="card mb-4 shadow-lg">
+<div class="card-header bg-primary text-white">
+<h2>Segmentación VLAN</h2>
+</div>
+<div class="card-body text-white">
+<p class="card-text">La segmentación por VLAN mejora la seguridad y el rendimiento al aislar el tráfico entre departamentos. Cada VLAN opera como una red independiente, previniendo la propagación de amenazas y optimizando el uso del ancho de banda. Las VLAN están conectadas a través del firewall central para control de políticas inter-VLAN.</p>
+<table class="table table-striped table-dark">
+<thead>
+<tr>
+<th>VLAN ID</th>
+<th>Departamento</th>
+<th>Red IP</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><span class="badge bg-primary">10</span></td><td>Administración</td><td>192.168.10.0/24</td><td>Oficinas ejecutivas y gestión institucional</td></tr>
+<tr><td><span class="badge bg-success">20</span></td><td>Laboratorios</td><td>192.168.20.0/24</td><td>Equipos de investigación y experimentación</td></tr>
+<tr><td><span class="badge bg-warning">30</span></td><td>Biblioteca</td><td>192.168.30.0/24</td><td>Sistemas de consulta y recursos digitales</td></tr>
+<tr><td><span class="badge bg-danger">40</span></td><td>Aulas</td><td>192.168.40.0/24</td><td>Salones de clase y espacios académicos</td></tr>
+<tr><td><span class="badge bg-secondary">50</span></td><td>Servidores</td><td>192.168.50.0/24</td><td>Infraestructura crítica y servicios centrales</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<footer class="bg-dark text-white text-center py-3">
+<p class="mb-1">Proyecto de Ingeniería de Redes - Universidad XYZ</p>
+<p class="mb-0">&copy; 2023 Todos los derechos reservados | Diseñado con Bootstrap</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
