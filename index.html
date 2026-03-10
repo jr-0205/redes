@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proyecto de Red Empresarial</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/simulator.css" rel="stylesheet">
+<link href="css/topology-diagram.css" rel="stylesheet">
 <style>
 body {
     background: linear-gradient(135deg, #0f1720 0%, #1f3a5f 50%, #0f1720 100%);
@@ -587,6 +589,7 @@ footer {
         max-width: 1140px;
     }
 }
+</style>
 </head>
 
 <body>
@@ -1006,11 +1009,28 @@ footer {
 
 <div class="card mb-4 shadow-lg">
 <div class="card-header bg-success text-white">
-<h2 style="font-size: clamp(1.3rem, 4vw, 2rem); margin: 0;">Simulador de Comunicación de Red - Herramienta de Diagnóstico</h2>
+<h2 style="font-size: clamp(1.3rem, 4vw, 2rem); margin: 0;">🌐 Simulador de Comunicación de Red - Herramienta de Diagnóstico</h2>
 </div>
 <div class="card-body text-white">
-<p class="card-text mb-4" style="font-size: clamp(0.95rem, 2.5vw, 1.05rem); line-height: 1.6;">Utiliza esta herramienta interactiva para simular comunicación entre diferentes dispositivos conectados a la red. Selecciona un dispositivo de origen y otro de destino para visualizar la ruta de comunicación, latencia estimada y análisis detallado.</p>
+<p class="card-text mb-4" style="font-size: clamp(0.95rem, 2.5vw, 1.05rem); line-height: 1.6;">Explora la topología de red interactiva. Haz clic en los dispositivos para seleccionar origen y destino, visualiza la ruta de comunicación y análisis detallado en tiempo real.</p>
 
+<!-- DIAGRAMA DE TOPOLOGÍA VISUAL -->
+<div class="card bg-dark mb-4" style="border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 12px;">
+<div class="card-header bg-info text-white" style="border-radius: 10px 10px 0 0;">
+<h5 style="margin: 0; font-size: clamp(1em, 2.5vw, 1.25rem);">🏗️ Topología de Red - Haz clic en los dispositivos</h5>
+</div>
+<div class="card-body" style="padding: clamp(15px, 3vw, 25px);">
+<div id="topologyDiagram" class="topology-container">
+<!-- Se renderiza dinámicamente con JavaScript -->
+</div>
+<p style="font-size: 0.85em; color: #b0c4de; margin-top: 15px; text-align: center;">
+<span style="display: inline-block; margin-right: 15px;">🟦 Azul: Dispositivo origen</span>
+<span style="display: inline-block;">🟩 Verde: Dispositivo destino</span>
+</p>
+</div>
+</div>
+
+<!-- TABLA DE DISPOSITIVOS -->
 <div class="card bg-dark mb-4" style="border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 12px;">
 <div class="card-header bg-info text-white" style="border-radius: 10px 10px 0 0;">
 <h5 style="margin: 0; font-size: clamp(1em, 2.5vw, 1.25rem);">📊 Base de Datos de Dispositivos Conectados</h5>
@@ -1037,33 +1057,34 @@ footer {
 </div>
 </div>
 
-<div style="background: rgba(0, 212, 255, 0.08); padding: clamp(15px, 3vw, 20px); border-radius: 12px; border: 1px solid rgba(0, 212, 255, 0.3); margin-bottom: 25px;">
-<div class="row g-3">
-<div class="col-12 col-lg-6">
-<label class="form-label fw-bold" style="font-size: clamp(0.95em, 2vw, 1.1em); color: #00d4ff; letter-spacing: 1px; text-transform: uppercase;">Dispositivo Origen</label>
-<div id="sourceDevices" class="d-flex flex-wrap gap-2" style="min-height: clamp(200px, 50vw, 280px); align-content: flex-start;">
+<!-- SELECTORES DE DISPOSITIVOS MEJORADOS -->
+<div class="selection-zone">
+<div class="selection-column">
+<div class="selection-column-title">🔵 Dispositivo Origen</div>
+<div class="device-list" id="sourceDevicesList">
 <!-- Se llena dinámicamente con JavaScript -->
 </div>
 </div>
-<div class="col-12 col-lg-6">
-<label class="form-label fw-bold" style="font-size: clamp(0.95em, 2vw, 1.1em); color: #00d4ff; letter-spacing: 1px; text-transform: uppercase;">Dispositivo Destino</label>
-<div id="destDevices" class="d-flex flex-wrap gap-2" style="min-height: clamp(200px, 50vw, 280px); align-content: flex-start;">
+<div class="selection-column">
+<div class="selection-column-title">🟢 Dispositivo Destino</div>
+<div class="device-list" id="destDevicesList">
 <!-- Se llena dinámicamente con JavaScript -->
-</div>
 </div>
 </div>
 </div>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4">
-<button class="btn btn-lg" onclick="simulatePing()" id="pingBtn" style="background: linear-gradient(135deg, #00d4ff, #0099cc); border: none; font-weight: bold; letter-spacing: 1px; padding: clamp(10px 20px, 2vw, 12px 40px); font-size: clamp(0.95rem, 2vw, 1.1rem); transition: all 0.3s ease;">
+<!-- BOTONES DE CONTROL -->
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4" style="margin-top: 25px;">
+<button class="btn btn-lg" onclick="simulatePingTopology()" id="pingBtn" style="background: linear-gradient(135deg, #00d4ff, #0099cc); border: none; font-weight: bold; letter-spacing: 1px; padding: clamp(10px 20px, 2vw, 12px 40px); font-size: clamp(0.95rem, 2vw, 1.1rem); transition: all 0.3s ease;">
 <span class="spinner-border spinner-border-sm me-2" id="pingSpinner" style="display:none;"></span>
 🚀 Ejecutar Ping
 </button>
-<button class="btn btn-lg btn-secondary" onclick="resetPing()" style="font-weight: bold; letter-spacing: 1px; padding: clamp(10px 20px, 2vw, 12px 40px); font-size: clamp(0.95rem, 2vw, 1.1rem);">
-🔄 Limpiar Resultados
+<button class="btn btn-lg btn-secondary" onclick="resetTopologySelection()" style="font-weight: bold; letter-spacing: 1px; padding: clamp(10px 20px, 2vw, 12px 40px); font-size: clamp(0.95rem, 2vw, 1.1rem);">
+🔄 Limpiar Selección
 </button>
 </div>
 
+<!-- RESULTADOS DE PING -->
 <div id="pingResults" class="mt-4">
 <!-- Resultados de ping aparecerán aquí -->
 </div>
@@ -1078,279 +1099,15 @@ footer {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="js/devices.js"></script>
+<script src="js/topology.js"></script>
+<script src="js/app.js"></script>
 <script>
-// Base de datos de dispositivos conectados
-const devices = [
-    { id: 1, name: 'PC Admin 1', ip: '192.168.10.5', vlan: 10, location: 'Edificio A - Piso 1', type: 'PC', status: 'online' },
-    { id: 2, name: 'PC Admin 2', ip: '192.168.10.15', vlan: 10, location: 'Edificio A - Piso 2', type: 'PC', status: 'online' },
-    { id: 3, name: 'PC Laboratorio 1', ip: '192.168.20.10', vlan: 20, location: 'Edificio B - Lab 01', type: 'Workstation', status: 'online' },
-    { id: 4, name: 'PC Laboratorio 2', ip: '192.168.20.20', vlan: 20, location: 'Edificio B - Lab 02', type: 'Workstation', status: 'online' },
-    { id: 5, name: 'Servidor Biblioteca', ip: '192.168.30.5', vlan: 30, location: 'Edificio C', type: 'Servidor', status: 'online' },
-    { id: 6, name: 'PC Aula 101', ip: '192.168.40.10', vlan: 40, location: 'Edificio D - Aula 101', type: 'PC', status: 'online' },
-    { id: 7, name: 'Impresora Aulas', ip: '192.168.40.50', vlan: 40, location: 'Edificio D - Pasillo', type: 'Impresora', status: 'online' },
-    { id: 8, name: 'Servidor Principal', ip: '192.168.50.10', vlan: 50, location: 'Edificio E - Cuarto 1', type: 'Servidor', status: 'online' },
-    { id: 9, name: 'Servidor BD', ip: '192.168.50.20', vlan: 50, location: 'Edificio E - Cuarto 2', type: 'Servidor', status: 'online' },
-    { id: 10, name: 'Switch Edificio A', ip: '192.168.10.1', vlan: 10, location: 'Edificio A - Cuarto Técnico', type: 'Switch', status: 'online' },
-    { id: 11, name: 'Access Point Patio', ip: '192.168.40.100', vlan: 40, location: 'Patio Central', type: 'Access Point', status: 'online' },
-    { id: 12, name: 'Firewall WatchGuard', ip: '192.168.1.1', vlan: 1, location: 'Edificio A - Sala de Control', type: 'Firewall', status: 'online' }
-];
-
-let selectedSource = null;
-let selectedDest = null;
-
-// Inicializar la interfaz
-function initializeInterface() {
-    populateDeviceTable();
-    populateDeviceSelectors();
-}
-
-// Llenar tabla de dispositivos
-function populateDeviceTable() {
-    const tbody = document.getElementById('deviceTableBody');
-    tbody.innerHTML = '';
-    devices.forEach(device => {
-        const row = `
-            <tr>
-                <td><strong>${device.id}</strong></td>
-                <td>${device.name}</td>
-                <td><code>${device.ip}</code></td>
-                <td><span class="badge bg-primary">${device.vlan}</span></td>
-                <td>${device.location}</td>
-                <td><span class="badge bg-info">${device.type}</span></td>
-                <td><span class="status-badge status-${device.status}">${device.status.toUpperCase()}</span></td>
-            </tr>
-        `;
-        tbody.innerHTML += row;
-    });
-}
-
-// Llenar selectores de dispositivos
-function populateDeviceSelectors() {
-    const sourceDiv = document.getElementById('sourceDevices');
-    const destDiv = document.getElementById('destDevices');
-    sourceDiv.innerHTML = '';
-    destDiv.innerHTML = '';
-    
-    devices.forEach(device => {
-        const sourceBtn = `
-            <button class="device-box" onclick="selectSource(${device.id}, this)" title="${device.ip}" style="position: relative; z-index: 1;">
-                <div class="device-icon">${getDeviceIcon(device.type)}</div>
-                <div class="device-name">${device.name}</div>
-                <div class="device-ip">${device.ip}</div>
-                <div class="device-type">${device.type}</div>
-            </button>
-        `;
-        sourceDiv.innerHTML += sourceBtn;
-        
-        const destBtn = `
-            <button class="device-box" onclick="selectDest(${device.id}, this)" title="${device.ip}" style="position: relative; z-index: 1;">
-                <div class="device-icon">${getDeviceIcon(device.type)}</div>
-                <div class="device-name">${device.name}</div>
-                <div class="device-ip">${device.ip}</div>
-                <div class="device-type">${device.type}</div>
-            </button>
-        `;
-        destDiv.innerHTML += destBtn;
-    });
-}
-
-// Obtener ícono según tipo de dispositivo
-function getDeviceIcon(type) {
-    const icons = {
-        'PC': '💻',
-        'Workstation': '🖥️',
-        'Servidor': '🗄️',
-        'Impresora': '🖨️',
-        'Switch': '🔄',
-        'Access Point': '📡',
-        'Firewall': '🔥'
-    };
-    return icons[type] || '📱';
-}
-
-// Seleccionar dispositivo origen
-function selectSource(deviceId, element) {
-    document.querySelectorAll('#sourceDevices .device-box').forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
-    selectedSource = devices.find(d => d.id === deviceId);
-}
-
-// Seleccionar dispositivo destino
-function selectDest(deviceId, element) {
-    document.querySelectorAll('#destDevices .device-box').forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
-    selectedDest = devices.find(d => d.id === deviceId);
-}
-
-// Simular ping
-function simulatePing() {
-    if (!selectedSource || !selectedDest) {
-        alert('Por favor selecciona un dispositivo de origen y destino');
-        return;
-    }
-    
-    if (selectedSource.id === selectedDest.id) {
-        alert('El origen y destino no pueden ser el mismo dispositivo');
-        return;
-    }
-    
-    const pingBtn = document.getElementById('pingBtn');
-    const pingSpinner = document.getElementById('pingSpinner');
-    pingBtn.disabled = true;
-    pingSpinner.style.display = 'inline-block';
-    
-    // Simular latencia de ping
-    setTimeout(() => {
-        displayPingResults();
-        pingBtn.disabled = false;
-        pingSpinner.style.display = 'none';
-    }, 2000);
-}
-
-// Mostrar resultados del ping
-function displayPingResults() {
-    const resultsDiv = document.getElementById('pingResults');
-    
-    // Calcular latencia realista basada en VLAN y tipo de dispositivo
-    let latency = Math.floor(Math.random() * 15) + 5; // 5-20ms por defecto
-    
-    // Aumentar latencia si están en diferente VLAN
-    if (selectedSource.vlan !== selectedDest.vlan) {
-        latency += Math.floor(Math.random() * 10) + 10; // +10-20ms adicionales
-    }
-    
-    // Aumentar latencia si debe pasar por firewall
-    if (selectedSource.vlan === 50 || selectedDest.vlan === 50) {
-        latency += Math.floor(Math.random() * 5) + 5;
-    }
-    
-    const status = selectedDest.status === 'online' ? 'EXITOSO' : 'FALLIDO';
-    const statusColor = selectedDest.status === 'online' ? 'status-online' : 'status-offline';
-    const statusIcon = selectedDest.status === 'online' ? '✓' : '✗';
-    
-    const routePath = calculateRoute(selectedSource, selectedDest);
-    const packetLoss = selectedDest.status === 'online' ? '0%' : '100%';
-    const bandwidth = Math.floor(Math.random() * 300 + 700);
-    const networkLoad = Math.floor(Math.random() * 30) + 20;
-    
-    let html = `
-        <div class="ping-result">
-            <div class="ping-result-header">
-                <h5>⚡ Resultado de Comunicación de Red</h5>
-                <div class="result-status">
-                    <span class="result-status-icon">${statusIcon}</span>
-                    <span class="status-badge ${statusColor}">${status}</span>
-                </div>
-            </div>
-            
-            <div class="route-container">
-                <p style="margin: 0 0 15px 0; color: #b0c4de; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9em;">
-                    📍 Ruta de Comunicación
-                </p>
-                ${routePath}
-            </div>
-            
-            <div class="metric-row">
-                <div class="metric-card">
-                    <div class="metric-label">⏱️ Latencia Promedio</div>
-                    <div class="metric-value">${latency}<span style="font-size: 0.6em;">ms</span></div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">📤 Paquetes Enviados</div>
-                    <div class="metric-value">4<span style="font-size: 0.6em;"> PKT</span></div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">📥 Paquetes Recibidos</div>
-                    <div class="metric-value">4<span style="font-size: 0.6em;"> PKT</span></div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-label">📊 Pérdida de Paquetes</div>
-                    <div class="metric-value">${packetLoss}</div>
-                </div>
-            </div>
-            
-            <div style="border-top: 2px solid rgba(0, 212, 255, 0.2); padding-top: 20px; margin-top: 20px;">
-                <p style="margin-bottom: 15px; color: #00d4ff; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9em;">
-                    🔍 Análisis Detallado
-                </p>
-                <div class="analysis-grid">
-                    <div class="analysis-item"><strong>Protocolo:</strong> ICMP</div>
-                    <div class="analysis-item"><strong>TTL (Time To Live):</strong> 64</div>
-                    <div class="analysis-item"><strong>Tamaño del paquete:</strong> 32 bytes</div>
-                    <div class="analysis-item"><strong>Ancho disponible:</strong> ${bandwidth} Mbps</div>
-                    <div class="analysis-item"><strong>Carga de red:</strong> ${networkLoad}%</div>
-                    <div class="analysis-item"><strong>Estado de seguridad:</strong> ✓ Permitido</div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    resultsDiv.innerHTML = html;
-    
-    // Agregar mensaje de finalización con animación
-    setTimeout(() => {
-        resultsDiv.innerHTML += `
-            <div class="alert alert-success" style="margin-top: 15px; border-radius: 10px; border: 2px solid #00ff00; background: rgba(0, 255, 0, 0.15);">
-                <strong style="color: #00ff00;">✓ Ping completado exitosamente</strong><br>
-                <span style="color: #e6edf3;">Latencia promedio: <strong>${latency}ms</strong> | Mín: <strong>${latency-2}ms</strong> | Máx: <strong>${latency+3}ms</strong></span>
-            </div>
-        `;
-    }, 1000);
-}
-
-// Calcular ruta de comunicación
-function calculateRoute(source, dest) {
-    const sameLAN = source.vlan === dest.vlan;
-    const firewall = devices.find(d => d.type === 'Firewall');
-    
-    let route = `
-        <div class="ping-path">
-            <div class="device-endpoint active">
-                <div class="endpoint-icon">${getDeviceIcon(source.type)}</div>
-                <div class="endpoint-name">${source.name}</div>
-                <div class="endpoint-ip">${source.ip}</div>
-            </div>
-    `;
-    
-    if (sameLAN) {
-        route += `
-            <div class="connection-line"></div>
-            <div class="connection-label">🔄 Switch Local VLAN ${source.vlan}</div>
-            <div class="connection-line"></div>
-        `;
-    } else {
-        route += `
-            <div class="connection-line"></div>
-            <div class="connection-label">🔥 Firewall Central</div>
-            <div class="connection-line"></div>
-            <div class="connection-label">🔄 Switch VLAN ${dest.vlan}</div>
-            <div class="connection-line"></div>
-        `;
-    }
-    
-    route += `
-            <div class="device-endpoint active">
-                <div class="endpoint-icon">${getDeviceIcon(dest.type)}</div>
-                <div class="endpoint-name">${dest.name}</div>
-                <div class="endpoint-ip">${dest.ip}</div>
-            </div>
-        </div>
-    `;
-    
-    return route;
-}
-
-// Limpiar resultados
-function resetPing() {
-    document.getElementById('pingResults').innerHTML = '';
-    selectedSource = null;
-    selectedDest = null;
-    document.querySelectorAll('.device-box').forEach(el => el.classList.remove('selected'));
-}
-
-// Inicializar cuando el documento esté listo
-document.addEventListener('DOMContentLoaded', initializeInterface);
+  // Inicializar interfaz al cargar la página
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeTopologyInterface();
+    populateDeviceSelectorsList();
+  });
 </script>
 
 </body>
